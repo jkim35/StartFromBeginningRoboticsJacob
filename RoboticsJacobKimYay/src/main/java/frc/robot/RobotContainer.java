@@ -6,10 +6,16 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PneumaticsCommand;
+import frc.robot.commands.ReverseMotors;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -21,13 +27,23 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  Joystick stick;
+  PneumaticsSubsystem m_pneumaticSubsystem;
+  PneumaticsCommand m_pneumaticCommand;
+  ClimbCommand m_climbCommand;
+  ReverseMotors m_reverseMotors;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-
+    JoystickButton pneumaticButton = new JoystickButton(stick,1);
+    JoystickButton motorButton = new JoystickButton(stick,2);
+    JoystickButton reverseButton = new JoystickButton(stick,3);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    m_pneumaticCommand = new PneumaticsCommand();
+    m_pneumaticSubsystem = new PneumaticsSubsystem();
+    m_climbCommand = new ClimbCommand();
+    m_reverseMotors = new ReverseMotors();
     // Configure the trigger bindings
     configureBindings();
   }
@@ -45,6 +61,9 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
+        pneumaticButton.onTrue(m_pneumaticCommand);
+        motorButton.onTrue(m_climbCommand);
+        reverseButton.onTrue(m_reverseMotors);
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
