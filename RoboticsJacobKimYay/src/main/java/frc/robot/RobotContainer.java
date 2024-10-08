@@ -32,19 +32,24 @@ public class RobotContainer {
   PneumaticsCommand m_pneumaticCommand;
   ClimbCommand m_climbCommand;
   ReverseMotors m_reverseMotors;
+  JoystickButton pneumaticButton;
+  JoystickButton motorButton;
+  JoystickButton reverseButton;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-    JoystickButton pneumaticButton = new JoystickButton(stick,1);
-    JoystickButton motorButton = new JoystickButton(stick,2);
-    JoystickButton reverseButton = new JoystickButton(stick,3);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_pneumaticCommand = new PneumaticsCommand();
     m_pneumaticSubsystem = new PneumaticsSubsystem();
     m_climbCommand = new ClimbCommand();
     m_reverseMotors = new ReverseMotors();
+    pneumaticButton = new JoystickButton(stick,0);
+    motorButton = new JoystickButton(stick,1);
+    reverseButton = new JoystickButton(stick,2);
     // Configure the trigger bindings
+
     configureBindings();
   }
 
@@ -61,9 +66,9 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-        pneumaticButton.onTrue(m_pneumaticCommand);
-        motorButton.onTrue(m_climbCommand);
-        reverseButton.onTrue(m_reverseMotors);
+    pneumaticButton.whileTrue(m_pneumaticCommand);
+    motorButton.whileTrue(m_climbCommand);
+    reverseButton.whileTrue(m_reverseMotors);
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
