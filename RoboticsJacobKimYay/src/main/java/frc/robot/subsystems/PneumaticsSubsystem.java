@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,20 +14,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class PneumaticsSubsystem extends SubsystemBase {
   PneumaticHub hub;
   DoubleSolenoid solenoid;
-  private final CANSparkMax neoMotor;
+  private final CANSparkMax neo;
   /** Creates a new PneumaticsSubsystem. */
   public PneumaticsSubsystem() {
-    neoMotor = new CANSparkMax(1,motorType.kBrushless);
+    neo = new CANSparkMax(20,MotorType.kBrushless);
     //Where the solenoid is connect to
-    hub = new PneumaticHub(7);
     //Makes the solenoid (first one is the one that makes the climb go up, the second is what makes that climb go down.)
-    solenoid = hub.makeDoubleSolenoid(2,3);
+    //solenoid = PneumaticHub.makeDoubleSolenoid(1,2);
   }
   public void togglePneumatics(){
-    solenoid.toggle();
+    //solenoid.toggle();
   }
-  public void moveMotors(){
-
+  public void moveMotors(double value){
+    neo.set(value);
+  }
+  public void stopMotors(){
+    neo.stopMotor();
   }
   @Override
   public void periodic() {
