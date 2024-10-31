@@ -14,23 +14,37 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class PneumaticsSubsystem extends SubsystemBase {
   PneumaticHub hub;
   DoubleSolenoid solenoid;
-  private final CANSparkMax neoMotor;
+  private final CANSparkMax neo;
   /** Creates a new PneumaticsSubsystem. */
   public PneumaticsSubsystem() {
+<<<<<<< HEAD
     neoMotor = new CANSparkMax(20,MotorType.kBrushless);
     //Where the solenoid is connect to
     hub = new PneumaticHub(6);
     //Makes the solenoid (first one is the one that makes the climb go up, the second is what makes that climb go down.)
     solenoid = hub.makeDoubleSolenoid(0,1);
+=======
+    neo = new CANSparkMax(20,MotorType.kBrushless);
+    //Where the solenoid is connect to
+    //Makes the solenoid (first one is the one that makes the climb go up, the second is what makes that climb go down.)
+    //solenoid = PneumaticHub.makeDoubleSolenoid(1,2);
+>>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
   }
   public void togglePneumatics(){
-    solenoid.toggle();
+    //solenoid.toggle();
   }
   public void moveMotors(double value){
+<<<<<<< HEAD
     neoMotor.set(value);
   }
   public void stopMotors(){
     neoMotor.stopMotor();
+=======
+    neo.set(value);
+  }
+  public void stopMotors(){
+    neo.stopMotor();
+>>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
   }
   @Override
   public void periodic() {

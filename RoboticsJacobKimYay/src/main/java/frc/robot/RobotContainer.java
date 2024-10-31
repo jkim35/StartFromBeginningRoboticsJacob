@@ -32,6 +32,7 @@ public class RobotContainer {
   PneumaticsCommand m_pneumaticCommand;
   ClimbCommand m_climbCommand;
   ReverseMotors m_reverseMotors;
+<<<<<<< HEAD
   JoystickButton pneumaticButton;
   JoystickButton motorButton;
   JoystickButton reverseButton;
@@ -39,15 +40,32 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
+=======
+       JoystickButton pneumaticButton;
+       JoystickButton  motorButton;
+       JoystickButton reverseButton;
+  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final CommandXboxController m_driverController =
+      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+>>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_pneumaticCommand = new PneumaticsCommand();
+    stick = new Joystick(0);
+  pneumaticButton = new JoystickButton(stick,1);
+    motorButton = new JoystickButton(stick,2);
+    reverseButton = new JoystickButton(stick,0);
     m_pneumaticSubsystem = new PneumaticsSubsystem();
+<<<<<<< HEAD
     m_climbCommand = new ClimbCommand();
     m_reverseMotors = new ReverseMotors();
     pneumaticButton = new JoystickButton(stick,0);
     motorButton = new JoystickButton(stick,1);
     reverseButton = new JoystickButton(stick,2);
+=======
+    m_pneumaticCommand = new PneumaticsCommand(m_pneumaticSubsystem);
+    m_climbCommand = new ClimbCommand(m_pneumaticSubsystem);
+    m_reverseMotors = new ReverseMotors(m_pneumaticSubsystem);
+>>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
     // Configure the trigger bindings
 
     configureBindings();
@@ -66,9 +84,15 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
+<<<<<<< HEAD
     pneumaticButton.whileTrue(m_pneumaticCommand);
     motorButton.whileTrue(m_climbCommand);
     reverseButton.whileTrue(m_reverseMotors);
+=======
+        pneumaticButton.whileTrue(m_pneumaticCommand);
+        motorButton.whileTrue(m_climbCommand);
+        reverseButton.whileTrue(m_reverseMotors);
+>>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.

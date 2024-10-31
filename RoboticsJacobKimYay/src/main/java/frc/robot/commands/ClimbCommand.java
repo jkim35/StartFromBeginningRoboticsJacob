@@ -10,7 +10,8 @@ import frc.robot.subsystems.PneumaticsSubsystem;
 public class ClimbCommand extends Command {
   PneumaticsSubsystem m_pneumaticsSubsystem;
   /** Creates a new ClimbCommand. */
-  public ClimbCommand() {
+  public ClimbCommand(PneumaticsSubsystem value) {
+    m_pneumaticsSubsystem = value;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

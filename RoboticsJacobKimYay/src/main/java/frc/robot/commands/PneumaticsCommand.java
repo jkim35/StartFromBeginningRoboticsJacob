@@ -10,8 +10,8 @@ import frc.robot.subsystems.PneumaticsSubsystem;
 public class PneumaticsCommand extends Command {
   PneumaticsSubsystem m_pneumaticsSubsystem;
   /** Creates a new PneumaticsCommand. */
-  public PneumaticsCommand() {
-
+  public PneumaticsCommand(PneumaticsSubsystem value) {
+    m_pneumaticsSubsystem = value;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
