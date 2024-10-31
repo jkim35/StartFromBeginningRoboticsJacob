@@ -18,12 +18,8 @@ public class ReverseMotors extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-<<<<<<< HEAD
-    m_pneumaticsSubsystem.moveMotors(0.2);
-=======
     m_pneumaticsSubsystem.moveMotors(-0.2);
->>>>>>> 1dee400e941f6a8dc4997d45f9d2d321abf81db3
-  }
+   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
